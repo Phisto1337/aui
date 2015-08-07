@@ -587,19 +587,19 @@ install_zram (){
 }
 #}}}
 #TLP {{{
-install_tlp(){
-  print_title "TLP - https://wiki.archlinux.org/index.php/Tlp"
-  print_info "TLP is an advanced power management tool for Linux. It is a pure command line tool with automated background tasks and does not contain a GUI."
-  read_input_text "Install TLP" $TLP
-  if [[ $OPTION == y ]]; then
-    package_install "tlp"
-    system_ctl enable tlp
-    system_ctl enable tlp-sleep
-    system_ctl mask systemd-rfkill
-    system_ctl enable tlp
-    tlp start
-    pause_function
-  fi
+#install_tlp(){
+#  print_title "TLP - https://wiki.archlinux.org/index.php/Tlp"
+#  print_info "TLP is an advanced power management tool for Linux. It is a pure command line tool with automated background tasks and does not contain a GUI."
+#  read_input_text "Install TLP" $TLP
+#  if [[ $OPTION == y ]]; then
+#    package_install "tlp"
+#    system_ctl enable tlp
+#    system_ctl enable tlp-sleep
+#    system_ctl mask systemd-rfkill
+#    system_ctl enable tlp
+#    tlp start
+#    pause_function
+#  fi
 }
 #}}}
 #XORG {{{
@@ -3433,22 +3433,22 @@ install_web_server(){
     systemctl start mysqld
     /usr/bin/mysql_secure_installation
   } #}}}
-  install_postgresql(){ #{{{
-    package_install "postgresql"
-    systemd-tmpfiles --create postgresql.conf
-    mkdir -p /var/lib/postgres
-    chown -R postgres:postgres /var/lib/postgres
-    echo "Enter your new postgres account password:"
-    passwd postgres
-    while [[ $? -ne 0 ]]; do
-      passwd postgres
-    done
-    su - postgres -c "initdb --locale ${LOCALE}.UTF-8 -D /var/lib/postgres/data"
-    system_ctl enable postgresql
-    system_ctl start postgresql
-    read_input_text "Install Postgis + Pgrouting" $POSTGIS
-    [[ $OPTION == y ]] && install_gis_extension
-  } #}}}
+  #install_postgresql(){ #{{{
+  #  package_install "postgresql"
+  #  systemd-tmpfiles --create postgresql.conf
+  #  mkdir -p /var/lib/postgres
+  #  chown -R postgres:postgres /var/lib/postgres
+  #  echo "Enter your new postgres account password:"
+  #  passwd postgres
+  #  while [[ $? -ne 0 ]]; do
+  #    passwd postgres
+  #  done
+  #  su - postgres -c "initdb --locale ${LOCALE}.UTF-8 -D /var/lib/postgres/data"
+  #  system_ctl enable postgresql
+  #  system_ctl start postgresql
+  #  read_input_text "Install Postgis + Pgrouting" $POSTGIS
+  #  [[ $OPTION == y ]] && install_gis_extension
+  #} #}}}
   install_gis_extension(){ #{{{
     package_install "postgis"
     aur_package_install "pgrouting"
