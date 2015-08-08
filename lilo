@@ -600,7 +600,7 @@ install_zram (){
 #    tlp start
 #    pause_function
 #  fi
-}
+#}
 #}}}
 #XORG {{{
 install_xorg(){
